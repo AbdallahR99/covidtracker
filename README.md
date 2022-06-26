@@ -14,13 +14,22 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
+## Running with Yarn ( Recommended )
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Install Corepack
+The preferred way to manage Yarn is through Corepack, a new binary shipped with all Node.js releases starting from 16.10. It acts as an intermediary between you and Yarn, and lets you use different package manager versions across multiple projects without having to check-in the Yarn binary anymore.
 
-## Running end-to-end tests
+Node.js >=16.10
+Corepack is included by default with all Node.js installs, but is currently opt-in. To enable it, run the following command:
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+`corepack enable`
+
+Node.js <16.10
+Corepack isn't included with Node.js in versions before the 16.10; to address that, run:
+
+`npm i -g corepack`.
+
+Then run `yarn install` to download the node packages
 
 ## Further help
 
