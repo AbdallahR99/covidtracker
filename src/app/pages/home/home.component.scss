@@ -1,0 +1,12 @@
+@import 'colors.scss';
+
+:host ::ng-deep {
+  .mat-list-base .mat-list-item {
+    height: auto !important;
+  }
+}
+
+mat-list-item:hover {
+  background-color: tint($primary, 5%);
+  cursor: pointer;
+}

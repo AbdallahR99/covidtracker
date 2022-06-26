@@ -1,0 +1,17 @@
+@import 'colors.scss';
+:host ::ng-deep {
+  .google-visualization-controls-rangefilter-thumblabel {
+    color: white !important;
+    font-weight: unset !important;
+  }
+  .google-visualization-controls-slider-thumb {
+    background-color: $info !important;
+    border-color: $info !important;
+    border-radius: 100px !important;
+  }
+  .google-visualization-controls-slider-horizontal {
+    border-radius: 50rem !important;
+    border: 1px solid rgba(0, 0, 0, 0.3) !important;
+    background-color: #778ca3 !important;
+  }
+}

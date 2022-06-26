@@ -1,0 +1,6 @@
+<mat-progress-bar
+       color="accent" *ngIf="$isLoading | async" mode="indeterminate" class="position-fixed top-0 start-0 end-0" style=" z-index: 9999;"  mode="indeterminate">
+</mat-progress-bar>
+<div class="w-100 my-2">
+  <router-outlet></router-outlet>
+</div>

@@ -1,0 +1,47 @@
+/* To learn more about this file see: https://angular.io/config/tsconfig. */
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@shared/*": ["src/app/core/shared/*"],
+      "@services/*": ["src/app/core/services/*"],
+      "@models/*": ["src/app/core/models/*"],
+      "@constants/*": ["src/app/core/constants/*"],
+      "@global/*": ["src/app/core/global/*"],
+      "@guards/*": ["src/app/core/guards/*"],
+      "@resolvers/*": ["src/app/core/resolvers/*"],
+      "@layout/*": ["src/app/core/layout/*"],
+      "@directives/*": ["src/app/core/directives/*"],
+      "@pipes/*": ["src/app/core/pipes/*"],
+      "@environments/*": ["src/environments/*"],
+      "@components/*": ["src/app/components/*"],
+      "@assets/*":["src/assets/*"]
+    },
+    "outDir": "./dist/out-tsc",
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "sourceMap": true,
+    "declaration": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "es2020",
+    "module": "es2020",
+    "lib": [
+      "es2020",
+      "dom"
+    ]
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
+  }
+}

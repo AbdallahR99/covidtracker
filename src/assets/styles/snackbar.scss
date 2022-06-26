@@ -1,0 +1,24 @@
+@import 'colors.scss';
+.snackbar-danger {
+  background: $danger;
+  color: #e4e4e4;
+  .mat-simple-snackbar-action button {
+    color: #fff;
+  }
+}
+
+
+.snackbar-success {
+  background: $success;
+  color: #e4e4e4;
+  .mat-simple-snackbar-action button {
+    color: #fff;
+  }
+}
+
+.closebtn {
+  .mat-simple-snackbar-action button {
+    font-size: unset;
+  }
+}
+

@@ -1,0 +1,20 @@
+
+@import "colors.scss";
+@import "bootstrap.scss";
+@import "fixes.scss";
+@import "font.scss";
+@import "animation.scss";
+@import "material.scss";
+@import "snackbar.scss";
+@import "scroll.scss";
+
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-color: $dark;}
+.loader {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+.loader .mat-progress-spinner circle, .mat-spinner circle {
+  stroke: #e91e63 !important;
+}

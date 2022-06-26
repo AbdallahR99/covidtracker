@@ -1,0 +1,228 @@
+<div *ngIf="!isError" class="container">
+  <section>
+
+    <div *ngIf="!isGlobalDataError" class="row g-2">
+      <ng-template [ngTemplateOutlet]="golobalData? summaryCard : summaryCardLaoding"
+        [ngTemplateOutletContext]="
+        {
+          label: 'Critical',
+          total: golobalData?.cases?.critical,
+          secondLabel: 'in Mild Condition',
+          secondTotal: midConditionsCount | number,
+          color: 'warning'
+        }">
+      </ng-template>
+      <ng-template [ngTemplateOutlet]="golobalData? summaryCard : summaryCardLaoding"
+        [ngTemplateOutletContext]="
+        {
+          label: 'Recovered',
+          total: golobalData?.cases?.total,
+          secondLabel: 'remaining',
+          secondTotal: remainingCount | number,
+          color: 'success'
+        }">
+      </ng-template>
+      <ng-template [ngTemplateOutlet]="golobalData? summaryCard : summaryCardLaoding"
+        [ngTemplateOutletContext]="
+        {
+          label: 'Deaths',
+          total: golobalData?.deaths?.total,
+          secondLabel: 'new',
+          secondTotal: golobalData?.deaths?.new,
+          color: 'danger'
+        }">
+      </ng-template>
+      <ng-template [ngTemplateOutlet]="golobalData? summaryCard : summaryCardLaoding"
+        [ngTemplateOutletContext]="
+        {
+          label: 'Total',
+          total: golobalData?.cases?.total,
+          secondLabel: 'today',
+          secondTotal: golobalData?.cases?.new,
+          color: 'info'
+        }">
+      </ng-template>
+
+    </div>
+    <div *ngIf="isGlobalDataError">
+      <app-error errorMessage="can't load global data"></app-error>
+    </div>
+  </section>
+  <div class="py-1"></div>
+
+  <section>
+    <div *ngIf="countriesData" class="row g-2">
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="bg-primary text-light p-3 h-100 rounded-3 shadow-sm">
+          <div class="input-group rounded-pill overflow-hidden mb-3">
+            <span class="input-group-text bg-secondary text-white border-0" id="search-perfix">
+              <span class="material-icons">
+                search
+                </span>
+            </span>
+            <input type="search" ngModel #search="ngModel"
+             class="form-control border-0" placeholder="Country name"
+             aria-label="Country name" aria-describedby="search-perfix">
+          </div>
+          <div class="d-flex">
+            <button mat-button [matMenuTriggerFor]="sortMenu">
+              Sort by <span class="material-icons">sort</span>
+            </button>
+            <div class="flex-fill"></div>
+            <button (click)="toggleSortDirection()" mat-button>
+              <span class="material-icons">
+                 {{ sortDirection == 'asc'? 'arrow_drop_down' : 'arrow_drop_up' }}
+              </span>
+            </button>
+          </div>
+
+          <mat-menu #sortMenu="matMenu">
+            <button mat-menu-item (click)="sortBy('active casee')">Active Cases</button>
+            <button mat-menu-item (click)="sortBy('total cases')">Total Cases</button>
+            <button mat-menu-item (click)="sortBy('new cases')">New Cases</button>
+            <button mat-menu-item (click)="sortBy('deaths')">Deaths</button>
+            <button mat-menu-item (click)="sortBy('new deaths')">New Deaths</button>
+            <button mat-menu-item (click)="sortBy('recovered')">Recovered</button>
+            <button mat-menu-item (click)="sortBy('critical')">Critical</button>
+          </mat-menu>
+          <mat-list role="list" style="max-height: 400px" class="overflow-auto">
+            <ng-container *ngFor="let item of countriesData | filter:search.value:'country':'continent' | sort:sortByProparty:sortDirection; trackBy:trackBy">
+              <mat-list-item role="button"
+              [routerLink]="[appRoutes.COUNTRY, item.country]"
+               class="text-white py-2">
+                <div class="d-flex w-100">
+                  <div class="d-flex align-items-center justify-content-center">
+                    <img
+                      [src]="item.countryCode ? ('https://flagcdn.com/32x24/' + (item.countryCode | lowercase ) + '.png') : 'https://www.svgrepo.com/show/195643/planet-earth-worldwide.svg'"
+                      width="32"
+                      height="24"
+                      (error)="$any($event.target).src = 'https://www.svgrepo.com/show/195643/planet-earth-worldwide.svg'"
+                      [alt]="item.countryName">
+                  </div>
+                  <div class="px-2"></div>
+                  <div class="d-flex flex-column flex-fill">
+                    <span>{{item.countryName}}</span>
+                    <div class="py-2"></div>
+                    <div class="d-flex">
+                      <span *ngIf="item.cases.active" class="text-info small">
+                        {{item.cases.active| number}} cases
+                      </span>
+                      <ng-container *ngIf="item.deaths.total">
+                        <ng-container *ngIf="item.deaths.total && item.cases.active">
+                          ,&nbsp;
+                        </ng-container>
+
+                        <span class="text-danger small">
+                          {{item.deaths.total | number}} deaths
+                        </span>
+                      </ng-container>
+
+                    </div>
+
+                  </div>
+                  <div class="d-flex flex-column text-end">
+                    <small *ngIf="item.cases.new" class="text-info">
+                      {{item.cases.new | number}}+
+                    </small>
+                    <small *ngIf="item.deaths.new" class="text-danger">
+                      {{item.deaths.new | number}}+
+                    </small>
+                  </div>
+                </div>
+              </mat-list-item>
+              <mat-divider></mat-divider>
+            </ng-container>
+            <!-- <cdk-virtual-scroll-viewport itemSize="50" class="">
+              <div *cdkVirtualFor="let item of countriesData"
+              class="text-white bg-warning">{{item.country}}</div>
+            </cdk-virtual-scroll-viewport> -->
+          </mat-list>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-8">
+        <div class="bg-primary text-light p-3 rounded-3 shadow-sm h-100">
+          <app-map [data]="countriesData"></app-map>
+        </div>
+      </div>
+
+    </div>
+    <div *ngIf="!countriesData && !isCountriesError"
+    class="d-flex bg-primary text-light p-3 h-100 rounded-3 shadow-sm position-relative" style="min-height:300px;">
+    <h1>World's Map</h1>
+    <div class="loader position-absolute rounded-3 top-0 start-0 end-0 bottom-0 d-flex align-items-center justify-content-center">
+      <mat-spinner></mat-spinner>
+
+    </div>
+    </div>
+    <div *ngIf="isCountriesError">
+        <app-error errorMessage="can't load world's map"></app-error>
+    </div>
+  </section>
+  <div class="py-1"></div>
+  <div class="bg-primary text-light p-3 rounded-3 shadow-sm">
+    <h3 class="text-center">
+      <div class="d-inline-flex">
+        <i class="material-icons">info</i>
+      <span class="text-uppercase">About</span>
+      </div>
+    </h3>
+    <p class="text-center">
+      This is a simple Covid-19 tracker.
+      It is not a realtime tracker.
+      It is just a simple way to track the Covid-19 situation in the world.
+    </p>
+  </div>
+</div>
+
+<ng-container *ngIf="isError">
+  <app-error></app-error>
+</ng-container>
+
+
+<ng-template #summaryCard
+let-label="label"
+let-total="total"
+let-secondLabel="secondLabel"
+let-secondTotal="secondTotal"
+let-color="color"
+>
+  <div class="col-6 col-md-3">
+    <div class="bg-primary text-light p-3 h-100 rounded-3 shadow-sm d-flex flex-column">
+      <p class="m-0 h3 flex-fill">{{ label }}</p>
+      <div class="d-flex justify-content-between">
+        <div>
+
+        </div>
+        <div class="d-flex flex-column mb-2 text-end">
+          <span class="text-{{color}} mb-1 h3">
+            {{ total | number }}
+          </span>
+          <span class="text-border small">
+            <bdi>{{ secondTotal }}</bdi>&nbsp;<bdi>{{secondLabel}}</bdi>
+          </span>
+        </div>
+
+      </div>
+      <div class="pt-1 bg-{{color}} rounded-pill"></div>
+    </div>
+  </div>
+</ng-template>
+<ng-template #summaryCardLaoding
+let-label="label"
+let-color="color"
+>
+  <div class="col-6 col-md-3">
+    <div class="bg-primary text-light p-3 h-100 rounded-3 shadow-sm">
+      <p class="m-0 h3">{{ label }}</p>
+      <div class="d-flex justify-content-between py-2">
+        <div class="d-block m-auto">
+          <div class="spinner-border text-{{color}}" role="status">
+            <span class="sr-only"></span>
+          </div>
+        </div>
+
+      </div>
+      <div class="pt-1 bg-{{color}} rounded-pill"></div>
+    </div>
+  </div>
+</ng-template>
