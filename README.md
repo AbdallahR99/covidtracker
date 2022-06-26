@@ -1,3 +1,10 @@
+## Live Demo
+https://abdallahr99.github.io/covidtracker/
+
+## Watch Video
+You can want a demo for the project through this link
+[https://drive.google.com/file/d/1rib_NlRrOrrzjs-C15YIHxdzi8ammNFT/view](https://drive.google.com/file/d/1bgJhiDiLt5rlR6MqQSq56maeIKAWpxqH/view)
+
 # Covidtracker
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.0.3.
@@ -14,7 +21,7 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Running with Yarn ( Recommended )
+## Install with Yarn ( Recommended )
 
 Install Corepack
 The preferred way to manage Yarn is through Corepack, a new binary shipped with all Node.js releases starting from 16.10. It acts as an intermediary between you and Yarn, and lets you use different package manager versions across multiple projects without having to check-in the Yarn binary anymore.
