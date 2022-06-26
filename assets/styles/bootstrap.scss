@@ -1,0 +1,21 @@
+@import "colors.scss";
+
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+
+$theme-colors: (
+  "primary": $primary,
+  "success": $success,
+  "danger": $danger,
+  "warning": $warning,
+  "info": $info,
+  "light": $light,
+  "dark": $dark,
+  "white": $white,
+  "transparent": $transparent,
+  "border": $border,
+  );
+
+@import "~bootstrap/scss/bootstrap";
+

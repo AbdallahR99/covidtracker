@@ -1,0 +1,48 @@
+textarea:focus,
+textarea.form-control:focus,
+input.form-control:focus,
+input[type=text]:focus,
+input[type=password]:focus,
+input[type=email]:focus,
+input[type=number]:focus,
+[type=text].form-control:focus,
+[type=password].form-control:focus,
+[type=email].form-control:focus,
+[type=tel].form-control:focus,
+[contenteditable].form-control:focus,
+select.form-control:focus {
+    box-shadow: none !important;
+}
+button.navbar-toggler:focus, button, rating, span{
+  outline: none !important;
+}
+
+*:focus {
+  outline: none !important;
+}
+
+app-header {
+  z-index: 999;
+}
+
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+input.custom-file-input {
+  left: 0;
+  top: 0;
+}
+
+[type='file']::-webkit-file-upload-button {
+  -webkit-appearance: button;
+  }

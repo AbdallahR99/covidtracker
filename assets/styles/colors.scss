@@ -1,0 +1,21 @@
+@function tint($color, $percentage) {
+  @return mix(white, $color, $percentage);
+}
+@function shade($color, $percentage) {
+  @return mix(black, $color, $percentage);
+}
+$dark: #2c3a47;
+
+$primary: tint($dark, 4%);
+$secondary: #778ca3;
+$success: #1DD1A1;
+$danger: #ee5253;
+$warning: #ffc107;
+$info: #0dcaf0;
+$light: #F4F6FB;
+$white: #fff;
+$border: #dee2e6;
+$blue: #00a8e8;
+$transparent: transparent;
+
+
